@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>毕业项目 · 课前准备单</title>
+    <style>
+        :root {
+            --primary: #4e5969; 
+            --done-color: #00b42a; /* 我已经做了 */
+            --idea-color: #165dff; /* 我还想做 (改为蓝色，代表思考与未来) */
+            --bg: #f2f3f5;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: #1d2129;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container { max-width: 600px; margin: 0 auto; }
+        
+        header { text-align: center; margin-bottom: 25px; }
+        h1 { font-size: 22px; margin: 0; color: #1d2129; }
+        .subtitle { font-size: 14px; color: #86909c; margin-top: 5px; }
+
+        /* 卡片基础样式 */
+        .task-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            border-top: 4px solid transparent;
+        }
+
+        .task-1 { border-top-color: var(--primary); }
+        .task-2-a { border-top-color: var(--done-color); display: none; }
+        .task-2-b { border-top-color: var(--idea-color); display: none; }
+
+        h2 { font-size: 18px; margin-top: 0; display: flex; align-items: center; justify-content: space-between;}
+        .tag { font-size: 12px; padding: 2px 8px; border-radius: 4px; color: white; font-weight: normal; }
+        
+        .section-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #4e5969;
+            margin-top: 20px;
+            border-bottom: 1px solid #e5e6eb;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+
+        /* 复制区域样式 */
+        .copy-wrapper {
+            position: relative;
+            background: #f7f8fa;
+            border: 1px dashed #c9cdd4;
+            padding: 15px;
+            padding-top: 35px; /* 给按钮留空间 */
+            border-radius: 8px;
+            font-size: 14px;
+            color: #4e5969;
+            margin: 10px 0;
+            transition: all 0.3s;
+        }
+        
+        /* 不同的配色风格 */
+        .idea-style {
+            background: #e8f3ff;
+            border: 1px solid #94bfff;
+            color: #003a8c;
+        }
+        .outline-style {
+            background: #eafff1;
+            border: 1px solid #b7eb8f;
+            color: #0050b3;
+        }
+
+        /* 复制按钮 */
+        .copy-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: white;
+            border: 1px solid #ddd;
+            padding: 4px 12px;
+            font-size: 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            color: #555;
+            font-weight: bold;
+            z-index: 10;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .copy-btn:hover { background: #f0f0f0; }
+
+        /* 选项按钮 */
+        .choice-container { display: flex; gap: 10px; margin-bottom: 20px; }
+        .choice-btn {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: all 0.2s;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .btn-done { background-color: var(--done-color); }
+        .btn-idea { background-color: var(--idea-color); }
+        
+        .choice-btn span { font-size: 12px; font-weight: normal; margin-top: 4px; opacity: 0.9; }
+        .choice-btn.active { opacity: 1; transform: scale(1.02); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+
+        ul { margin: 5px 0; padding-left: 20px; }
+        li { margin-bottom: 5px; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>🎓 明日课程准备清单</h1>
+        <p class="subtitle">请大家利用今晚，整理思路，轻装上阵</p>
+    </header>
+
+    <!-- 任务1：全员必做 -->
+    <div class="task-card task-1">
+        <h2>任务一：日常分享 <span class="tag" style="background:var(--primary)">全员必做</span></h2>
+        <p style="font-size:14px; color:#666;">明早每人有一个 2 分钟的开场分享，请填好下方模板：</p>
+        
+        <div class="section-title">🗣️ 分享话术模板（点击右上角复制）</div>
+        <div class="copy-wrapper">
+            <button class="copy-btn" onclick="copyContent(this)">📄 一键复制模板</button>
+            大家好，我是 [ 填职业/身份 ]。<br><br>
+            以前在生活或工作中，遇到 [ 具体什么麻烦事 ] 的时候，我都是手动处理，非常繁琐。<br><br>
+            现在我学会了用AI。我只需要给它发送 [ 你输入的内容 ]，它就能帮我自动 [ AI做的动作 ]。<br><br>
+            我觉得AI让我的生活 [ 一句总结感悟 ]。
+        </div>
+    </div>
+
+    <!-- 任务2：路径选择 -->
+    <h3 style="text-align:center; font-size:16px; margin:30px 0 15px;">👇 任务二：请根据实际情况二选一</h3>
+    <div class="choice-container">
+        <button class="choice-btn btn-done" onclick="showTask('done', this)">
+            ✅ 我已经做了
+            <span>整理汇报大纲</span>
+        </button>
+        <button class="choice-btn btn-idea" onclick="showTask('idea', this)">
+            💡 我还想做
+            <span>仅构思，不搭建</span>
+        </button>
+    </div>
+
+    <!-- 路径A：已经做了 (Done) -->
+    <div id="done-task" class="task-card task-2-a">
+        <h2>任务二：整理汇报 <span class="tag" style="background:var(--done-color)">成果展示</span></h2>
+        <p style="font-size:14px;">请按照以下逻辑整理你的展示内容，把重点放在“解决思路”上：</p>
+
+        <div class="section-title">📝 汇报大纲模板（点击右上角复制）</div>
+        <div class="copy-wrapper outline-style">
+            <button class="copy-btn" onclick="copyContent(this)">📄 复制大纲</button>
+            <strong>1. 痛点场景 (The Why)</strong><br>
+            - 我是谁？日常工作中什么事在浪费时间？<br>
+            - 一句话需求：我想让AI帮我做______。<br><br>
+            <strong>2. 核心架构 (The How)</strong><br>
+            - 流程逻辑：数据从哪里来？中间经过什么处理？最后输出什么？<br>
+            - 核心Prompt：展示我调试最久、效果最好的一段提示词。<br><br>
+            <strong>3. 成果演示 (The Show)</strong><br>
+            - 效果展示：(放截图或录屏)<br>
+            - 人在回路：在这个流程中，哪一步是必须由我人工确认的？<br>
+            - 未来迭代：下一步我想增加什么功能？
+        </div>
+    </div>
+
+    <!-- 路径B：还想做 (Idea) -->
+    <div id="idea-task" class="task-card task-2-b">
+        <h2>任务二：需求构思 <span class="tag" style="background:var(--idea-color)">深度挖掘</span></h2>
+        <p style="font-size:14px;"><strong>不需要现在搭建！</strong>今晚你只需要做一个“产品经理”。<br>请大胆设想一个能解决你真实痛点的工具（越复杂越好），填好下方的【需求画布】，明天课上我们一起探讨怎么实现。</p>
+
+        <div class="section-title">🧠 超级需求画布（点击右上角复制）</div>
+        <div class="copy-wrapper idea-style">
+            <button class="copy-btn" onclick="copyContent(this)">📄 复制画布</button>
+            <strong>【我的智能体构思】</strong><br><br>
+            <strong>1. 核心痛点：</strong><br>
+            我现在最头疼的工作/生活流程是：______。<br>
+            (例如：每天要从几百条群消息里手动筛选出客户咨询，还要分类整理，眼睛都看瞎了)<br><br>
+            <strong>2. 理想输入：</strong><br>
+            我希望直接把 ______ 丢给AI。<br>
+            (例如：微信聊天记录导出文件 / 一张乱七八糟的Excel表)<br><br>
+            <strong>3. 理想输出：</strong><br>
+            我希望AI处理完，直接给我 ______。<br>
+            (例如：一张整理好的飞书多维表格，并且自动用微信发给我确认)<br><br>
+            <strong>4. 最大的卡点：</strong><br>
+            我现在觉得最难实现的地方是：______。<br>
+            (例如：怎么让AI识别哪些是广告，哪些是真客户？)
+        </div>
+
+        <div class="section-title">👀 讲师提示：</div>
+        <ul style="color:#666; font-size:13px;">
+            <li>不要考虑“这个能不能做”，先考虑“我我想不想要”。</li>
+            <li>不要局限于简单的对话，可以想象它能联网、能画图、能发邮件。</li>
+            <li>写得越具体，明天课上收获越大！</li>
+        </ul>
+    </div>
+
+</div>
+
+<script>
+    function showTask(type, btn) {
+        // 样式重置
+        document.querySelectorAll('.choice-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // 隐藏卡片
+        document.getElementById('done-task').style.display = 'none';
+        document.getElementById('idea-task').style.display = 'none';
+
+        // 显示选中卡片
+        const target = document.getElementById(type + '-task');
+        target.style.display = 'block';
+        target.scrollIntoView({behavior: 'smooth', block: 'start'});
+    }
+
+    function copyContent(btn) {
+        const wrapper = btn.closest('.copy-wrapper');
+        const clone = wrapper.cloneNode(true);
+        
+        // 移除按钮防复制
+        const btnInClone = clone.querySelector('.copy-btn');
+        if(btnInClone) btnInClone.remove();
+        
+        let textToCopy = clone.innerText;
+        textToCopy = textToCopy.replace(/^\s*[\r\n]/gm, '').trim();
+
+        navigator.clipboard.writeText(textToCopy).then(() => {
+            const originalText = btn.innerText;
+            btn.innerText = '✅ 已复制!';
+            btn.style.background = '#d9f7be';
+            btn.style.color = '#389e0d';
+            btn.style.borderColor = '#b7eb8f';
+            
+            setTimeout(() => {
+                btn.innerText = originalText;
+                btn.style.background = 'white';
+                btn.style.color = '#555';
+                btn.style.borderColor = '#ddd';
+            }, 2000);
+        }).catch(err => {
+            alert('浏览器不支持自动复制，请长按文本手动复制');
+        });
+    }
+</script>
+
+</body>
+</html>
